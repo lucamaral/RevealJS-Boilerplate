@@ -3,7 +3,6 @@
 Using gulp, jade and browserify.
 
 ## TODO:
-- Add gulp task to open the presentation
 - Add sass or less gulp task
 
 ## Usage:
