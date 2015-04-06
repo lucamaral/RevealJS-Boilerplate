@@ -1,0 +1,20 @@
+{
+  "name": "RevealJS-boilerplate",
+  "version": "1.0.0",
+  "description": "Simple RevealJS boilerplate to my presentations",
+  "author": "Lucas Amaral <lucas.amaral.dw@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-browserify": "^0.5.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-ejs": "^1.1.0",
+    "gulp-html-minifier": "^0.1.6",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-open": "^0.3.2",
+    "gulp-plumber": "^1.0.0"
+  },
+  "dependencies": {
+    "reveal": "0.0.4"
+  }
+}
