@@ -5,6 +5,7 @@ var plumber = require('gulp-plumber');
 var clean = require('gulp-clean');
 var ejs = require("gulp-ejs");
 var browserify = require('gulp-browserify');
+var connect = require('gulp-connect');
 
 var cleanDirectory = function (directory){
     return function (){
@@ -23,8 +24,7 @@ var paths = {
 
 var distPaths = {
     scripts: 'dist/scripts',
-    stylesheets: 'dist/stylesheets',
-    templates: 'dist/templates'
+    stylesheets: 'dist/stylesheets'
 };
 
 gulp.task('watch', function () {
@@ -40,7 +40,8 @@ gulp.task('scripts', ['clean-dist-scripts'], function() {
         .pipe(browserify({
           insertGlobals : true
         }))
-        .pipe(gulp.dest(distPaths.scripts));
+        .pipe(gulp.dest(distPaths.scripts))
+        .pipe(connect.reload());
 });
 
 gulp.task('stylesheets', ['clean-dist-stylesheets'], function () {
@@ -49,25 +50,31 @@ gulp.task('stylesheets', ['clean-dist-stylesheets'], function () {
         .pipe(minifyCSS({
             keepBreaks: true
         }))
-        .pipe(gulp.dest(distPaths.stylesheets));
+        .pipe(gulp.dest(distPaths.stylesheets))
+        .pipe(connect.reload());
 });
 
 gulp.task('templates', ['clean-dist-templates'], function () {
-    gulp.src(paths.templates)
+    gulp.src('src/templates/index.ejs')
         .pipe(plumber())
         .pipe(ejs())
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
-        .pipe(gulp.dest(distPaths.templates));
+        .pipe(gulp.dest("./"))
+        .pipe(connect.reload());
 });
 
-gulp.task('clean-dist', ['clean-dist-scripts', 'clean-dist-stylesheets', 'clean-dist-templates']);
+gulp.task('connect', function() {
+  connect.server({
+    livereload: true
+  });
+});
 
 gulp.task('clean-dist-scripts', cleanDirectory(distPaths.scripts));
 
 gulp.task('clean-dist-stylesheets', cleanDirectory(distPaths.stylesheets));
 
-gulp.task('clean-dist-templates', cleanDirectory(distPaths.templates));
+gulp.task('clean-dist-templates', cleanDirectory('index.html'));
 
-gulp.task('default', ['clean-dist', 'scripts', 'stylesheets', 'templates', 'watch']);
+gulp.task('default', ['connect', 'watch']);
