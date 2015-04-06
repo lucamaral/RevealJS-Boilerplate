@@ -12,4 +12,4 @@ Using gulp, jade and browserify.
 
 - Run `gulp`
 
-- Open `index.html` located on `dist/templates`
+- Open `localhost:8080`
