@@ -1,6 +1,6 @@
 # Boilerplate to presentations made with [Revealjs](http://lab.hakim.se/reveal-js/#/)
 
-Using gulp, jade and browserify.
+Using gulp, ejs and browserify.
 
 ## TODO:
 - Add sass or less gulp task
